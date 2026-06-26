@@ -6,6 +6,11 @@ from app.validators.validation_report import ValidationReport
 
 
 class Report:
+    EXCLUDED_FROM_READINESS = {
+        "Planned Fixes",
+        "Installation",
+    }
+
     def __init__(self) -> None:
         self._results: list[CheckResult] = []
 
@@ -20,7 +25,8 @@ class Report:
         validation = ValidationReport()
 
         for result in self._results:
-            validation.add(result)
+            if result.title not in self.EXCLUDED_FROM_READINESS:
+                validation.add(result)
 
         return ReadinessScore().calculate(validation)
 
