@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from app.installers.grub_btrfs import GrubBtrfsInstaller
+from app.installers.mount_options import MountOptionsInstaller
 from app.installers.timeshift import TimeshiftInstaller
 from app.providers.base import PackageProvider
 from app.providers.systemd import SystemdProvider
@@ -23,3 +24,6 @@ class InstallerFactory:
             self.package_provider,
             self.systemd_provider,
         )
+
+    def mount_options(self) -> MountOptionsInstaller:
+        return MountOptionsInstaller()
