@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 
+from app.core.runner import Runner
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="buffos")
@@ -19,19 +21,18 @@ def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
 
-    if args.command == "version":
-        print("BuffOS Studio")
-        return
+    match args.command:
+        case "version":
+            print("BuffOS Studio")
 
-    if args.command == "analyze":
-        print("Analyze mode")
-        return
+        case "analyze":
+            Runner(dry_run=True).execute()
 
-    if args.command == "apply":
-        print("Apply mode")
-        return
+        case "apply":
+            Runner().execute()
 
-    parser.print_help()
+        case _:
+            parser.print_help()
 
 
 if __name__ == "__main__":
