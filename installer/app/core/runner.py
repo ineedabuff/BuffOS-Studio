@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Protocol
 
-from app.checks.result import CheckResult
+from app.analysis.result import CheckResult
 from app.core.logger import get_logger
 
 

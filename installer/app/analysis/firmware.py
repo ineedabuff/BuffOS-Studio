@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from app.checks.base import Check
+from app.analysis.base import Check
 
 
 class FirmwareCheck(Check):

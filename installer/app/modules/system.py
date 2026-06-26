@@ -1,4 +1,4 @@
-from app.checks.operating_system import OperatingSystemCheck
+from app.analysis.operating_system import OperatingSystemCheck
 from app.modules.base import Module
 
 
