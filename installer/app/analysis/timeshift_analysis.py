@@ -20,8 +20,7 @@ class TimeshiftAnalysis(Check):
 
     def run(self) -> CheckResult:
         installed = (
-            Path("/usr/bin/timeshift").exists()
-            or Path("/usr/sbin/timeshift").exists()
+            Path("/usr/bin/timeshift").exists() or Path("/usr/sbin/timeshift").exists()
         )
 
         return CheckResult(

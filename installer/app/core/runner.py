@@ -10,15 +10,13 @@ from app.core.report import Report
 from app.core.validator_runner import ValidatorRunner
 from app.validators.btrfs_layout import BtrfsLayoutValidator
 
-
 logger = get_logger()
 
 
 class Module(Protocol):
     name: str
 
-    def run(self):
-        ...
+    def run(self): ...
 
 
 class Runner:

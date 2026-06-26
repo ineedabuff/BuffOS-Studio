@@ -1,9 +1,9 @@
-from app.analysis.operating_system_analysis import OperatingSystemAnalysis
 from app.analysis.filesystem import FilesystemAnalysis
 from app.analysis.firmware_analysis import FirmwareAnalysis
+from app.analysis.grub_btrfs_analysis import GrubBtrfsAnalysis
+from app.analysis.operating_system_analysis import OperatingSystemAnalysis
 from app.analysis.secure_boot_analysis import SecureBootAnalysis
 from app.analysis.timeshift_analysis import TimeshiftAnalysis
-from app.analysis.grub_btrfs_analysis import GrubBtrfsAnalysis
 
 
 def test_operating_system():

@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
-
 LOG_DIR = Path.home() / ".local" / "share" / "buffos"
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
