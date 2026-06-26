@@ -5,6 +5,7 @@ from typing import Protocol
 
 from app.analysis.analysis_report import AnalysisReport
 from app.analysis.result import CheckResult
+from app.core.dry_run import DryRun
 from app.core.logger import get_logger
 from app.core.progress import Progress
 from app.core.report import Report
@@ -35,6 +36,7 @@ class Runner:
         factory: InstallerFactory | None = None,
         installer_runner: InstallerRunner | None = None,
         validator_runner: ValidatorRunner | None = None,
+        dry_run: bool = False,
     ) -> None:
         self.modules: list[Module] = []
         self.report = Report()
@@ -46,6 +48,7 @@ class Runner:
             SystemdProvider(),
         )
         self.validator_runner = validator_runner or self._create_validator_runner()
+        self.dry_run = dry_run
 
     def register(self, module: Module) -> None:
         self.modules.append(module)
@@ -65,6 +68,12 @@ class Runner:
         installers = plan.all()
 
         self._report_planned_fixes(installers)
+
+        if self.dry_run:
+            DryRun().show(plan)
+            self.report.summary()
+            self.progress.finish()
+            return
 
         self.progress.step(4, 5, "Installing")
         for installer in installers:
