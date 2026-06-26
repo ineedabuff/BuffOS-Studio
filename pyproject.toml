@@ -1,3 +1,18 @@
+[project]
+name = "buffos-studio"
+version = "0.1.0"
+description = "BuffOS Studio installer"
+requires-python = ">=3.14"
+
+[project.scripts]
+buffos = "app.cli.main:main"
+
+[tool.setuptools]
+package-dir = {"" = "installer"}
+
+[tool.setuptools.packages.find]
+where = ["installer"]
+
 [tool.ruff]
 line-length = 100
 target-version = "py314"
