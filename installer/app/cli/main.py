@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 
-from app.core.runner import Runner
+from app.cli.modules import create_runner
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -26,10 +26,10 @@ def main() -> None:
             print("BuffOS Studio 0.1.0")
 
         case "analyze":
-            Runner(dry_run=True).execute()
+            create_runner(dry_run=True).execute()
 
         case "apply":
-            Runner().execute()
+            create_runner().execute()
 
         case _:
             parser.print_help()
