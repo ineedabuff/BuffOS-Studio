@@ -16,6 +16,3 @@ class GrubBtrfsInstaller(Installer):
 
     def configure(self) -> bool:
         return True
-
-    def verify(self) -> bool:
-        return True

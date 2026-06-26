@@ -14,7 +14,3 @@ class Installer(ABC):
     @abstractmethod
     def configure(self) -> bool:
         pass
-
-    @abstractmethod
-    def verify(self) -> bool:
-        pass

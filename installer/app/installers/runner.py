@@ -18,7 +18,4 @@ class InstallerRunner:
             if not installer.configure():
                 return False
 
-            if not installer.verify():
-                return False
-
         return True
