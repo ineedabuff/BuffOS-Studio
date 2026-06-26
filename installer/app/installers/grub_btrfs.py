@@ -12,11 +12,21 @@ class GrubBtrfsInstaller(Installer):
     def __init__(self, provider: PackageProvider, systemd: SystemdProvider) -> None:
         self.provider = provider
         self.systemd = systemd
+        self.installed = False
+        self.skipped = False
 
     def install(self) -> bool:
-        return self.provider.install("grub-btrfs")
+        self.installed = self.provider.install("grub-btrfs")
+
+        if not self.installed:
+            self.skipped = True
+
+        return True
 
     def configure(self) -> bool:
+        if self.skipped:
+            return True
+
         service = "grub-btrfsd.service"
 
         if not self.systemd.enable(service):
