@@ -24,6 +24,13 @@ class Report:
 
         return ReadinessScore().calculate(validation)
 
+    @property
+    def status(self) -> str:
+        if self.readiness == 100:
+            return "System Ready"
+
+        return "Installation Required"
+
     def summary(self) -> None:
         print()
         print("System Analysis")
@@ -47,3 +54,4 @@ class Report:
         print(f"Failed: {failed}")
         print()
         print(f"BuffOS Readiness: {self.readiness}%")
+        print(f"Status: {self.status}")
