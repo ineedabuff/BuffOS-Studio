@@ -5,13 +5,13 @@ from app.providers.fstab import FstabProvider
 
 
 class MountOptionsInstaller(Installer):
-    OPTIONS = (
-        "compress=zstd,"
-        "noatime,"
-        "ssd,"
-        "discard=async,"
-        "space_cache=v2"
-    )
+    OPTIONS = [
+        "compress=zstd",
+        "noatime",
+        "ssd",
+        "discard=async",
+        "space_cache=v2",
+    ]
 
     def __init__(self, fstab: FstabProvider) -> None:
         self.fstab = fstab
@@ -20,13 +20,23 @@ class MountOptionsInstaller(Installer):
         return True
 
     def configure(self) -> bool:
-        content = self.fstab.read()
+        lines: list[str] = []
 
-        updated = content.replace(
-            "defaults",
-            self.OPTIONS,
-        )
+        for line in self.fstab.read().splitlines():
+            if not line.strip() or line.startswith("#"):
+                lines.append(line)
+                continue
 
-        self.fstab.write(updated)
+            parts = line.split()
+
+            if len(parts) < 4 or parts[2] != "btrfs":
+                lines.append(line)
+                continue
+
+            parts[3] = ",".join(self.OPTIONS)
+
+            lines.append("\t".join(parts))
+
+        self.fstab.write("\n".join(lines) + "\n")
 
         return True

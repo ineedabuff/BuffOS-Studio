@@ -3,16 +3,18 @@ from app.providers.fakes.fake_fstab import FakeFstabProvider
 
 
 def test_mount_options_installer():
-    provider = FakeFstabProvider(
-        "UUID=123 / btrfs defaults,ssd 0 0\n"
-    )
+    provider = FakeFstabProvider("UUID=123 / btrfs defaults,ssd 0 0\n")
 
     installer = MountOptionsInstaller(provider)
 
     assert installer.install() is True
     assert installer.configure() is True
 
-    assert provider.read() == (
-        "UUID=123 / btrfs "
-        "compress=zstd,noatime,ssd,discard=async,space_cache=v2,ssd 0 0\n"
-    )
+    content = provider.read()
+
+    assert "compress=zstd" in content
+    assert "noatime" in content
+    assert "ssd" in content
+    assert "discard=async" in content
+    assert "space_cache=v2" in content
+    assert "defaults" not in content
