@@ -6,6 +6,7 @@ from typing import Protocol
 from app.analysis.analysis_report import AnalysisReport
 from app.analysis.result import CheckResult
 from app.core.logger import get_logger
+from app.core.progress import Progress
 from app.core.report import Report
 from app.core.validator_runner import ValidatorRunner
 from app.install.installer_factory import InstallerFactory
@@ -38,6 +39,7 @@ class Runner:
         self.modules: list[Module] = []
         self.report = Report()
         self.analysis_report = AnalysisReport()
+        self.progress = Progress()
         self.installer_runner = installer_runner or InstallerRunner()
         self.factory = factory or InstallerFactory(
             AptProvider(),
@@ -51,16 +53,20 @@ class Runner:
     def execute(self) -> None:
         logger.info("Starting installation...")
 
+        self.progress.step(1, 5, "Analyzing")
         self._run_modules()
 
+        self.progress.step(2, 5, "Validating")
         validation_report = self.validator_runner.run(self.analysis_report)
 
+        self.progress.step(3, 5, "Planning")
         planner = InstallationPlanner(self.factory)
         plan = planner.create(validation_report)
         installers = plan.all()
 
         self._report_planned_fixes(installers)
 
+        self.progress.step(4, 5, "Installing")
         for installer in installers:
             self.installer_runner.register(installer)
 
@@ -74,12 +80,14 @@ class Runner:
             )
         )
 
+        self.progress.step(5, 5, "Revalidating")
         final_validation = self.validator_runner.run(self.analysis_report)
 
         for result in final_validation.all():
             self.report.add(result)
 
         self.report.summary()
+        self.progress.finish()
 
         logger.info("Installation finished.")
 
