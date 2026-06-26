@@ -1,10 +1,9 @@
-import platform
 import shutil
 import subprocess
-from pathlib import Path
 
 from app.checks.filesystem import FilesystemCheck
 from app.checks.firmware import FirmwareCheck
+from app.checks.operating_system import OperatingSystemCheck
 from app.modules.base import Module
 
 
@@ -25,23 +24,16 @@ class SystemCheckModule(Module):
     def _check_os(self) -> bool:
         self.logger.info("Checking operating system...")
 
-        if platform.system() != "Linux":
+        if not OperatingSystemCheck.is_linux():
             self.logger.error("Unsupported operating system.")
             return False
 
-        self.logger.info(f"Operating system: {platform.system()}")
+        self.logger.info(f"Operating system: {OperatingSystemCheck.system()}")
 
-        os_release = Path("/etc/os-release")
-        if os_release.exists():
-            data = {}
-            for line in os_release.read_text().splitlines():
-                if "=" in line:
-                    key, value = line.split("=", 1)
-                    data[key] = value.strip('"')
-
-            self.logger.info(f"Distribution : {data.get('PRETTY_NAME', 'Unknown')}")
-            self.logger.info(f"Version      : {data.get('VERSION_ID', 'Unknown')}")
-            self.logger.info(f"ID           : {data.get('ID', 'Unknown')}")
+        data = OperatingSystemCheck.os_release()
+        self.logger.info(f"Distribution : {data.get('PRETTY_NAME', 'Unknown')}")
+        self.logger.info(f"Version      : {data.get('VERSION_ID', 'Unknown')}")
+        self.logger.info(f"ID           : {data.get('ID', 'Unknown')}")
 
         return True
 
