@@ -1,9 +1,9 @@
 import platform
 import shutil
 import subprocess
-
 from pathlib import Path
 
+from app.checks.filesystem import FilesystemCheck
 from app.checks.firmware import FirmwareCheck
 from app.modules.base import Module
 
@@ -82,15 +82,9 @@ class SystemCheckModule(Module):
     def _check_btrfs(self) -> bool:
         self.logger.info("Checking root filesystem...")
 
-        result = subprocess.run(
-            ["findmnt", "-n", "-o", "FSTYPE", "/"],
-            capture_output=True,
-            text=True,
-        )
+        fs = FilesystemCheck.root_filesystem()
 
-        fs = result.stdout.strip()
-
-        if fs == "btrfs":
+        if FilesystemCheck.is_btrfs():
             self.logger.info("Root filesystem: Btrfs")
             return True
 
