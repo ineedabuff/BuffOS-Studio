@@ -3,9 +3,12 @@ from __future__ import annotations
 from collections.abc import Iterable
 from typing import Protocol
 
+from app.analysis.analysis_report import AnalysisReport
 from app.analysis.result import CheckResult
 from app.core.logger import get_logger
 from app.core.report import Report
+from app.core.validator_runner import ValidatorRunner
+from app.validators.btrfs_layout import BtrfsLayoutValidator
 
 
 logger = get_logger()
@@ -19,11 +22,12 @@ class Module(Protocol):
 
 
 class Runner:
-    """Executes registered modules."""
-
     def __init__(self) -> None:
         self.modules: list[Module] = []
         self.report = Report()
+        self.analysis_report = AnalysisReport()
+        self.validator_runner = ValidatorRunner()
+        self.validator_runner.register(BtrfsLayoutValidator())
 
     def register(self, module: Module) -> None:
         self.modules.append(module)
@@ -38,12 +42,12 @@ class Runner:
                 result = module.run()
 
                 if isinstance(result, CheckResult):
-                    self.report.add(result)
+                    self.analysis_report.add(result)
 
                 elif isinstance(result, Iterable):
                     for item in result:
                         if isinstance(item, CheckResult):
-                            self.report.add(item)
+                            self.analysis_report.add(item)
 
                 elif isinstance(result, bool):
                     if result:
@@ -54,6 +58,14 @@ class Runner:
             except Exception as exc:
                 logger.exception(f"✗ {module.name} failed: {exc}")
                 return
+
+        for result in self.analysis_report.all():
+            self.report.add(result)
+
+        validation_report = self.validator_runner.run(self.analysis_report)
+
+        for result in validation_report.all():
+            self.report.add(result)
 
         self.report.summary()
 
