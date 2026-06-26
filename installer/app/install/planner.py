@@ -20,4 +20,9 @@ class InstallationPlanner:
         if grub_btrfs is None or grub_btrfs.failed:
             plan.add(self.factory.grub_btrfs())
 
+        mount_options = report.get("Mount Options")
+        if mount_options is None or mount_options.failed:
+            # À implémenter lorsque MountOptionsInstaller existera.
+            pass
+
         return plan
