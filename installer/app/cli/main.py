@@ -10,9 +10,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub = parser.add_subparsers(dest="command")
 
-    sub.add_parser("analyze", help="Analyze the system")
-    sub.add_parser("apply", help="Analyze and repair the system")
-    sub.add_parser("version", help="Show BuffOS Studio version")
+    sub.add_parser("version", help="Show version")
+    sub.add_parser("analyze", help="Analyze only")
+    sub.add_parser("apply", help="Analyze and repair")
 
     return parser
 
@@ -23,7 +23,7 @@ def main() -> None:
 
     match args.command:
         case "version":
-            print("BuffOS Studio")
+            print("BuffOS Studio 0.1.0")
 
         case "analyze":
             Runner(dry_run=True).execute()

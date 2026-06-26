@@ -71,6 +71,7 @@ class Runner:
 
         if self.dry_run:
             DryRun().show(plan)
+            self._add_validation_results(validation_report)
             self.report.summary()
             self.progress.finish()
             return
@@ -91,9 +92,7 @@ class Runner:
 
         self.progress.step(5, 5, "Revalidating")
         final_validation = self.validator_runner.run(self.analysis_report)
-
-        for result in final_validation.all():
-            self.report.add(result)
+        self._add_validation_results(final_validation)
 
         self.report.summary()
         self.progress.finish()
@@ -132,8 +131,11 @@ class Runner:
             return
 
         names = ", ".join(installer.__class__.__name__ for installer in installers)
+        self.report.add(CheckResult(False, "Planned Fixes", names))
 
-        self.report.add(CheckResult(True, "Planned Fixes", names))
+    def _add_validation_results(self, validation_report) -> None:
+        for result in validation_report.all():
+            self.report.add(result)
 
     def _create_validator_runner(self) -> ValidatorRunner:
         runner = ValidatorRunner()
