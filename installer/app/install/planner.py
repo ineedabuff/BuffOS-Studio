@@ -4,14 +4,12 @@ from app.install.installation_plan import InstallationPlan
 from app.installers.grub_btrfs import GrubBtrfsInstaller
 from app.installers.timeshift import TimeshiftInstaller
 from app.providers.base import PackageProvider
-from app.providers.systemd import SystemdProvider
 from app.validators.validation_report import ValidationReport
 
 
 class InstallationPlanner:
-    def __init__(self, provider: PackageProvider, systemd: SystemdProvider) -> None:
+    def __init__(self, provider: PackageProvider) -> None:
         self.provider = provider
-        self.systemd = systemd
 
     def create(self, report: ValidationReport) -> InstallationPlan:
         plan = InstallationPlan()
@@ -22,6 +20,6 @@ class InstallationPlanner:
 
         grub_btrfs = report.get("grub-btrfs")
         if grub_btrfs is None or grub_btrfs.failed:
-            plan.add(GrubBtrfsInstaller(self.provider, self.systemd))
+            plan.add(GrubBtrfsInstaller(self.provider))
 
         return plan
