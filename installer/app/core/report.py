@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from app.checks.result import CheckResult
+from app.analysis.result import CheckResult
 
 
 class Report:

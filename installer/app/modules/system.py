@@ -1,12 +1,30 @@
-from app.checks.operating_system import OperatingSystemCheck
+from app.analysis.filesystem import FilesystemAnalysis
+from app.analysis.firmware_analysis import FirmwareAnalysis
+from app.analysis.grub_btrfs_analysis import GrubBtrfsAnalysis
+from app.analysis.home_subvolume_analysis import HomeSubvolumeAnalysis
+from app.analysis.mount_options_analysis import MountOptionsAnalysis
+from app.analysis.operating_system_analysis import OperatingSystemAnalysis
+from app.analysis.root_subvolume_analysis import RootSubvolumeAnalysis
+from app.analysis.secure_boot_analysis import SecureBootAnalysis
+from app.analysis.timeshift_analysis import TimeshiftAnalysis
 from app.modules.base import Module
 
 
 class SystemCheckModule(Module):
-    """Runs system analysis checks."""
+    """Runs system analysis."""
 
-    name = "System Check"
+    name = "System Analysis"
     description = "Analyze the current system."
 
     def run(self):
-        return OperatingSystemCheck().run()
+        return [
+            OperatingSystemAnalysis().run(),
+            FirmwareAnalysis().run(),
+            SecureBootAnalysis().run(),
+            FilesystemAnalysis().run(),
+            RootSubvolumeAnalysis().run(),
+            HomeSubvolumeAnalysis().run(),
+            MountOptionsAnalysis().run(),
+            TimeshiftAnalysis().run(),
+            GrubBtrfsAnalysis().run(),
+        ]

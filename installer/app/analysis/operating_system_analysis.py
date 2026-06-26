@@ -1,12 +1,12 @@
 import platform
 from pathlib import Path
 
-from app.checks.base import Check
-from app.checks.result import CheckResult
+from app.analysis.base import Check
+from app.analysis.result import CheckResult
 
 
-class OperatingSystemCheck(Check):
-    """Operating system related checks."""
+class OperatingSystemAnalysis(Check):
+    """Operating system related analysis."""
 
     name = "Operating System"
     description = "Validate Linux distribution information."
