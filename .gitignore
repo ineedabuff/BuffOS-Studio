@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Logs
+*.log
+logs/
+
+# Build
+build/
+dist/
+
+# Qt
+*.qrc.dep
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Linux
+*.swp
+*~
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+
+# Images ISO
+*.iso
+
+# Packages
+*.deb
+*.rpm
+*.AppImage
+
+# Temporary
+tmp/
+.cache/
