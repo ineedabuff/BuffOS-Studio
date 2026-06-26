@@ -10,6 +10,7 @@ from app.core.report import Report
 from app.core.validator_runner import ValidatorRunner
 from app.install.installer_factory import InstallerFactory
 from app.install.planner import InstallationPlanner
+from app.installers.base import Installer
 from app.installers.runner import InstallerRunner
 from app.providers.apt import AptProvider
 from app.providers.systemd import SystemdProvider
@@ -56,8 +57,11 @@ class Runner:
 
         planner = InstallationPlanner(self.factory)
         plan = planner.create(validation_report)
+        installers = plan.all()
 
-        for installer in plan.all():
+        self._report_planned_fixes(installers)
+
+        for installer in installers:
             self.installer_runner.register(installer)
 
         installed = self.installer_runner.run()
@@ -104,6 +108,15 @@ class Runner:
 
         if isinstance(result, bool) and not result:
             logger.warning("Module returned False")
+
+    def _report_planned_fixes(self, installers: list[Installer]) -> None:
+        if not installers:
+            self.report.add(CheckResult(True, "Planned Fixes", "None"))
+            return
+
+        names = ", ".join(installer.__class__.__name__ for installer in installers)
+
+        self.report.add(CheckResult(True, "Planned Fixes", names))
 
     def _create_validator_runner(self) -> ValidatorRunner:
         runner = ValidatorRunner()
