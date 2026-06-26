@@ -2,6 +2,7 @@ import platform
 from pathlib import Path
 
 from app.checks.base import Check
+from app.checks.result import CheckResult
 
 
 class OperatingSystemCheck(Check):
@@ -10,21 +11,21 @@ class OperatingSystemCheck(Check):
     name = "Operating System"
     description = "Validate Linux distribution information."
 
-    def run(self) -> bool:
-        self.logger.info("Checking operating system...")
-
+    def run(self) -> CheckResult:
         if not self.is_linux():
-            self.logger.error("Unsupported operating system.")
-            return False
-
-        self.logger.info(f"Operating system: {self.system()}")
+            return CheckResult(
+                success=False,
+                title=self.name,
+                message="Unsupported operating system",
+            )
 
         data = self.os_release()
-        self.logger.info(f"Distribution : {data.get('PRETTY_NAME', 'Unknown')}")
-        self.logger.info(f"Version      : {data.get('VERSION_ID', 'Unknown')}")
-        self.logger.info(f"ID           : {data.get('ID', 'Unknown')}")
 
-        return True
+        return CheckResult(
+            success=True,
+            title=self.name,
+            message=data.get("PRETTY_NAME", "Unknown"),
+        )
 
     @staticmethod
     def system() -> str:
