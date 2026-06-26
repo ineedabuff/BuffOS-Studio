@@ -1,8 +1,10 @@
 import platform
 import shutil
 import subprocess
+
 from pathlib import Path
 
+from app.checks.firmware import FirmwareCheck
 from app.modules.base import Module
 
 
@@ -17,6 +19,7 @@ class SystemCheckModule(Module):
             self._check_os()
             and self._check_uefi()
             and self._check_secure_boot()
+            and self._check_btrfs()
         )
 
     def _check_os(self) -> bool:
@@ -29,10 +32,8 @@ class SystemCheckModule(Module):
         self.logger.info(f"Operating system: {platform.system()}")
 
         os_release = Path("/etc/os-release")
-
         if os_release.exists():
             data = {}
-
             for line in os_release.read_text().splitlines():
                 if "=" in line:
                     key, value = line.split("=", 1)
@@ -47,7 +48,7 @@ class SystemCheckModule(Module):
     def _check_uefi(self) -> bool:
         self.logger.info("Checking firmware mode...")
 
-        if Path("/sys/firmware/efi").exists():
+        if FirmwareCheck.is_uefi():
             self.logger.info("Firmware mode: UEFI")
             return True
 
@@ -77,3 +78,21 @@ class SystemCheckModule(Module):
             self.logger.info(output)
 
         return True
+
+    def _check_btrfs(self) -> bool:
+        self.logger.info("Checking root filesystem...")
+
+        result = subprocess.run(
+            ["findmnt", "-n", "-o", "FSTYPE", "/"],
+            capture_output=True,
+            text=True,
+        )
+
+        fs = result.stdout.strip()
+
+        if fs == "btrfs":
+            self.logger.info("Root filesystem: Btrfs")
+            return True
+
+        self.logger.error(f"Root filesystem: {fs}")
+        return False
