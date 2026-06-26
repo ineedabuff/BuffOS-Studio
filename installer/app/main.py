@@ -1,12 +1,9 @@
-#!/usr/bin/env python3
+from app.core.logger import get_logger
+from app.core.ui import print_header
 
-from core.ui import print_header
+logger = get_logger()
 
 
 def main() -> None:
     print_header()
-    print("BuffOS Studio installer is ready.")
-
-
-if __name__ == "__main__":
-    main()
+    logger.info("BuffOS Studio launcher started.")
