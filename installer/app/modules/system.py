@@ -1,5 +1,6 @@
 from app.analysis.filesystem import FilesystemAnalysis
 from app.analysis.firmware_analysis import FirmwareAnalysis
+from app.analysis.grub_btrfs_analysis import GrubBtrfsAnalysis
 from app.analysis.home_subvolume_analysis import HomeSubvolumeAnalysis
 from app.analysis.mount_options_analysis import MountOptionsAnalysis
 from app.analysis.operating_system_analysis import OperatingSystemAnalysis
@@ -25,4 +26,5 @@ class SystemCheckModule(Module):
             HomeSubvolumeAnalysis().run(),
             MountOptionsAnalysis().run(),
             TimeshiftAnalysis().run(),
+            GrubBtrfsAnalysis().run(),
         ]
