@@ -22,8 +22,7 @@ class MountOptionsValidator:
         options = set(mount.message.split(","))
 
         valid = all(
-            any(opt.startswith(req) for opt in options)
-            for req in self.REQUIRED
+            any(opt.startswith(req) for opt in options) for req in self.REQUIRED
         )
 
         return CheckResult(

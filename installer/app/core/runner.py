@@ -13,15 +13,13 @@ from app.validators.grub_btrfs_validator import GrubBtrfsValidator
 from app.validators.mount_options_validator import MountOptionsValidator
 from app.validators.timeshift_validator import TimeshiftValidator
 
-
 logger = get_logger()
 
 
 class Module(Protocol):
     name: str
 
-    def run(self):
-        ...
+    def run(self): ...
 
 
 class Runner:
