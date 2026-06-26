@@ -1,4 +1,6 @@
 import platform
+import shutil
+import subprocess
 from pathlib import Path
 
 from app.modules.base import Module
@@ -11,7 +13,11 @@ class SystemCheckModule(Module):
     description = "Validate basic system requirements."
 
     def run(self) -> bool:
-        return self._check_os() and self._check_uefi()
+        return (
+            self._check_os()
+            and self._check_uefi()
+            and self._check_secure_boot()
+        )
 
     def _check_os(self) -> bool:
         self.logger.info("Checking operating system...")
@@ -35,8 +41,6 @@ class SystemCheckModule(Module):
             self.logger.info(f"Distribution : {data.get('PRETTY_NAME', 'Unknown')}")
             self.logger.info(f"Version      : {data.get('VERSION_ID', 'Unknown')}")
             self.logger.info(f"ID           : {data.get('ID', 'Unknown')}")
-        else:
-            self.logger.warning("/etc/os-release not found.")
 
         return True
 
@@ -49,3 +53,27 @@ class SystemCheckModule(Module):
 
         self.logger.error("Firmware mode: BIOS/Legacy")
         return False
+
+    def _check_secure_boot(self) -> bool:
+        self.logger.info("Checking Secure Boot...")
+
+        if shutil.which("mokutil") is None:
+            self.logger.warning("mokutil is not installed.")
+            return True
+
+        result = subprocess.run(
+            ["mokutil", "--sb-state"],
+            capture_output=True,
+            text=True,
+        )
+
+        output = result.stdout.strip()
+
+        if "enabled" in output.lower():
+            self.logger.warning("Secure Boot: ENABLED")
+        elif "disabled" in output.lower():
+            self.logger.info("Secure Boot: disabled")
+        else:
+            self.logger.info(output)
+
+        return True
