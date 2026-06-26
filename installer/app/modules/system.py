@@ -1,84 +1,12 @@
-import shutil
-import subprocess
-
-from app.checks.filesystem import FilesystemCheck
-from app.checks.firmware import FirmwareCheck
 from app.checks.operating_system import OperatingSystemCheck
 from app.modules.base import Module
 
 
 class SystemCheckModule(Module):
-    """Checks whether the system is ready for BuffOS installation."""
+    """Runs system analysis checks."""
 
     name = "System Check"
-    description = "Validate basic system requirements."
+    description = "Analyze the current system."
 
-    def run(self) -> bool:
-        return (
-            self._check_os()
-            and self._check_uefi()
-            and self._check_secure_boot()
-            and self._check_btrfs()
-        )
-
-    def _check_os(self) -> bool:
-        self.logger.info("Checking operating system...")
-
-        if not OperatingSystemCheck.is_linux():
-            self.logger.error("Unsupported operating system.")
-            return False
-
-        self.logger.info(f"Operating system: {OperatingSystemCheck.system()}")
-
-        data = OperatingSystemCheck.os_release()
-        self.logger.info(f"Distribution : {data.get('PRETTY_NAME', 'Unknown')}")
-        self.logger.info(f"Version      : {data.get('VERSION_ID', 'Unknown')}")
-        self.logger.info(f"ID           : {data.get('ID', 'Unknown')}")
-
-        return True
-
-    def _check_uefi(self) -> bool:
-        self.logger.info("Checking firmware mode...")
-
-        if FirmwareCheck.is_uefi():
-            self.logger.info("Firmware mode: UEFI")
-            return True
-
-        self.logger.error("Firmware mode: BIOS/Legacy")
-        return False
-
-    def _check_secure_boot(self) -> bool:
-        self.logger.info("Checking Secure Boot...")
-
-        if shutil.which("mokutil") is None:
-            self.logger.warning("mokutil is not installed.")
-            return True
-
-        result = subprocess.run(
-            ["mokutil", "--sb-state"],
-            capture_output=True,
-            text=True,
-        )
-
-        output = result.stdout.strip()
-
-        if "enabled" in output.lower():
-            self.logger.warning("Secure Boot: ENABLED")
-        elif "disabled" in output.lower():
-            self.logger.info("Secure Boot: disabled")
-        else:
-            self.logger.info(output)
-
-        return True
-
-    def _check_btrfs(self) -> bool:
-        self.logger.info("Checking root filesystem...")
-
-        fs = FilesystemCheck.root_filesystem()
-
-        if FilesystemCheck.is_btrfs():
-            self.logger.info("Root filesystem: Btrfs")
-            return True
-
-        self.logger.error(f"Root filesystem: {fs}")
-        return False
+    def run(self):
+        return OperatingSystemCheck().run()

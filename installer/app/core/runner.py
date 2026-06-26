@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from typing import Protocol
 
-from .logger import get_logger
+from app.checks.result import CheckResult
+from app.core.logger import get_logger
 
 
 logger = get_logger()
@@ -11,7 +12,7 @@ logger = get_logger()
 class Module(Protocol):
     name: str
 
-    def run(self) -> bool:
+    def run(self) -> bool | CheckResult:
         ...
 
 
@@ -30,6 +31,13 @@ class Runner:
 
             try:
                 result = module.run()
+
+                if isinstance(result, CheckResult):
+                    if result.success:
+                        logger.info(f"✓ {result.title}: {result.message}")
+                    else:
+                        logger.warning(f"✗ {result.title}: {result.message}")
+                    continue
 
                 if result:
                     logger.info(f"✓ {module.name} completed")
