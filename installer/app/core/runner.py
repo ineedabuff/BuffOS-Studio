@@ -10,6 +10,7 @@ from app.core.report import Report
 from app.core.validator_runner import ValidatorRunner
 from app.validators.btrfs_layout import BtrfsLayoutValidator
 from app.validators.mount_options_validator import MountOptionsValidator
+from app.validators.timeshift_validator import TimeshiftValidator
 
 
 logger = get_logger()
@@ -30,6 +31,7 @@ class Runner:
         self.validator_runner = ValidatorRunner()
         self.validator_runner.register(BtrfsLayoutValidator())
         self.validator_runner.register(MountOptionsValidator())
+        self.validator_runner.register(TimeshiftValidator())
 
     def register(self, module: Module) -> None:
         self.modules.append(module)
