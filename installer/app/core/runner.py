@@ -9,6 +9,7 @@ from app.core.logger import get_logger
 from app.core.report import Report
 from app.core.validator_runner import ValidatorRunner
 from app.validators.btrfs_layout import BtrfsLayoutValidator
+from app.validators.grub_btrfs_validator import GrubBtrfsValidator
 from app.validators.mount_options_validator import MountOptionsValidator
 from app.validators.timeshift_validator import TimeshiftValidator
 
@@ -32,6 +33,7 @@ class Runner:
         self.validator_runner.register(BtrfsLayoutValidator())
         self.validator_runner.register(MountOptionsValidator())
         self.validator_runner.register(TimeshiftValidator())
+        self.validator_runner.register(GrubBtrfsValidator())
 
     def register(self, module: Module) -> None:
         self.modules.append(module)
