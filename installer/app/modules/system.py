@@ -11,6 +11,9 @@ class SystemCheckModule(Module):
     description = "Validate basic system requirements."
 
     def run(self) -> bool:
+        return self._check_os() and self._check_uefi()
+
+    def _check_os(self) -> bool:
         self.logger.info("Checking operating system...")
 
         if platform.system() != "Linux":
@@ -36,3 +39,13 @@ class SystemCheckModule(Module):
             self.logger.warning("/etc/os-release not found.")
 
         return True
+
+    def _check_uefi(self) -> bool:
+        self.logger.info("Checking firmware mode...")
+
+        if Path("/sys/firmware/efi").exists():
+            self.logger.info("Firmware mode: UEFI")
+            return True
+
+        self.logger.error("Firmware mode: BIOS/Legacy")
+        return False
