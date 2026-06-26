@@ -1,6 +1,8 @@
 from app.analysis.result import CheckResult
+from app.install.installer_factory import InstallerFactory
 from app.install.planner import InstallationPlanner
 from app.providers.fakes.fake_apt import FakeAptProvider
+from app.providers.fakes.fake_systemd import FakeSystemdProvider
 from app.validators.validation_report import ValidationReport
 
 
@@ -14,7 +16,11 @@ def make_report(timeshift_ok: bool, grub_ok: bool) -> ValidationReport:
 
 
 def make_planner() -> InstallationPlanner:
-    return InstallationPlanner(FakeAptProvider())
+    factory = InstallerFactory(
+        FakeAptProvider(),
+        FakeSystemdProvider(),
+    )
+    return InstallationPlanner(factory)
 
 
 def test_planner_adds_timeshift_installer_when_timeshift_is_invalid():
