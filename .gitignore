@@ -41,3 +41,4 @@ dist/
 # Temporary
 tmp/
 .cache/
+*.egg-info/
