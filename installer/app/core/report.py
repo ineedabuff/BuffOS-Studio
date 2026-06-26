@@ -1,33 +1,43 @@
 from __future__ import annotations
 
 from app.analysis.result import CheckResult
+from app.validators.readiness_score import ReadinessScore
+from app.validators.validation_report import ValidationReport
 
 
 class Report:
-    """Collects the results of every executed check."""
-
     def __init__(self) -> None:
-        self.results: list[CheckResult] = []
+        self._results: list[CheckResult] = []
 
     def add(self, result: CheckResult) -> None:
-        self.results.append(result)
-
-    @property
-    def passed(self) -> int:
-        return sum(result.success for result in self.results)
-
-    @property
-    def failed(self) -> int:
-        return len(self.results) - self.passed
+        self._results.append(result)
 
     def summary(self) -> None:
-        print("\nSystem Analysis")
-        print("-" * 40)
+        print()
+        print("System Analysis")
+        print("----------------------------------------")
 
-        for result in self.results:
+        passed = 0
+        failed = 0
+
+        readiness = ValidationReport()
+
+        for result in self._results:
             status = "✓" if result.success else "✗"
+
+            if result.success:
+                passed += 1
+            else:
+                failed += 1
+
+            readiness.add(result)
             print(f"{status} {result.title:<20} {result.message}")
 
-        print("-" * 40)
-        print(f"Passed: {self.passed}")
-        print(f"Failed: {self.failed}")
+        print("----------------------------------------")
+        print(f"Passed: {passed}")
+        print(f"Failed: {failed}")
+
+        score = ReadinessScore().calculate(readiness)
+
+        print()
+        print(f"BuffOS Readiness: {score}%")

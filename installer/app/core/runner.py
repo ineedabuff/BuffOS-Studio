@@ -9,6 +9,8 @@ from app.core.logger import get_logger
 from app.core.report import Report
 from app.core.validator_runner import ValidatorRunner
 from app.validators.btrfs_layout import BtrfsLayoutValidator
+from app.validators.mount_options_validator import MountOptionsValidator
+
 
 logger = get_logger()
 
@@ -16,7 +18,8 @@ logger = get_logger()
 class Module(Protocol):
     name: str
 
-    def run(self): ...
+    def run(self):
+        ...
 
 
 class Runner:
@@ -26,6 +29,7 @@ class Runner:
         self.analysis_report = AnalysisReport()
         self.validator_runner = ValidatorRunner()
         self.validator_runner.register(BtrfsLayoutValidator())
+        self.validator_runner.register(MountOptionsValidator())
 
     def register(self, module: Module) -> None:
         self.modules.append(module)
