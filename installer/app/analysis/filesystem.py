@@ -1,19 +1,43 @@
-import subprocess
+"""
+BuffOS Studio
+
+Filesystem Analysis
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+from app.analysis.base import Check
+from app.analysis.result import CheckResult
 
 
-class FilesystemCheck:
-    """Filesystem-related checks."""
+class FilesystemAnalysis(Check):
+    """Detect the root filesystem."""
 
-    @staticmethod
-    def root_filesystem() -> str:
-        result = subprocess.run(
-            ["findmnt", "-n", "-o", "FSTYPE", "/"],
-            capture_output=True,
-            text=True,
+    name = "Filesystem"
+    description = "Detect root filesystem."
+
+    def run(self) -> CheckResult:
+        filesystem = self.detect_root_filesystem()
+
+        return CheckResult(
+            success=True,
+            title=self.name,
+            message=filesystem,
         )
 
-        return result.stdout.strip()
-
     @staticmethod
-    def is_btrfs() -> bool:
-        return FilesystemCheck.root_filesystem() == "btrfs"
+    def detect_root_filesystem() -> str:
+        mounts = Path("/proc/mounts")
+
+        if not mounts.exists():
+            return "Unknown"
+
+        for line in mounts.read_text().splitlines():
+            parts = line.split()
+
+            if len(parts) >= 3 and parts[1] == "/":
+                return parts[2]
+
+        return "Unknown"

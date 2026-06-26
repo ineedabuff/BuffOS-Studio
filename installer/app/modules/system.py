@@ -1,12 +1,18 @@
-from app.analysis.operating_system import OperatingSystemCheck
+from app.analysis.filesystem import FilesystemAnalysis
+from app.analysis.firmware_analysis import FirmwareAnalysis
+from app.analysis.operating_system_analysis import OperatingSystemAnalysis
 from app.modules.base import Module
 
 
 class SystemCheckModule(Module):
-    """Runs system analysis checks."""
+    """Runs system analysis."""
 
-    name = "System Check"
+    name = "System Analysis"
     description = "Analyze the current system."
 
     def run(self):
-        return OperatingSystemCheck().run()
+        return [
+            OperatingSystemAnalysis().run(),
+            FirmwareAnalysis().run(),
+            FilesystemAnalysis().run(),
+        ]

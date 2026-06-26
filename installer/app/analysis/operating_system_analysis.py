@@ -5,8 +5,8 @@ from app.analysis.base import Check
 from app.analysis.result import CheckResult
 
 
-class OperatingSystemCheck(Check):
-    """Operating system related checks."""
+class OperatingSystemAnalysis(Check):
+    """Operating system related analysis."""
 
     name = "Operating System"
     description = "Validate Linux distribution information."
