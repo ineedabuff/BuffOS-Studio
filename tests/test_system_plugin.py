@@ -8,3 +8,5 @@ def test_system_plugin():
     assert plugin.name == "System"
     assert plugin.description == "System configuration and maintenance plugin"
     assert plugin.version == "0.1.0"
+
+    assert len(plugin.analyses) == 3

@@ -8,8 +8,8 @@ def test_core_plugin():
     assert plugin.name == "Core"
     assert plugin.description == "Core Buff Helper plugin"
 
-    assert len(plugin.analyses) == 9
-    assert len(plugin.validators) == 4
+    assert len(plugin.analyses) == 6
+    assert len(plugin.validators) == 1
 
     assert plugin.installers == []
     assert plugin.commands == []
