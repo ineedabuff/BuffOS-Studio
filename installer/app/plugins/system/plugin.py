@@ -1,0 +1,19 @@
+from __future__ import annotations
+
+from app.plugins.manifest import PluginManifest
+from app.plugins.plugin import Plugin
+
+
+class SystemPlugin(Plugin):
+    def __init__(self) -> None:
+        super().__init__(
+            manifest=PluginManifest(
+                id="system",
+                name="System",
+                version="0.1.0",
+                description="System configuration and maintenance plugin",
+            ),
+        )
+
+
+PLUGIN = SystemPlugin
