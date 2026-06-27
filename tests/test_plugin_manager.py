@@ -1,10 +1,17 @@
 from app.plugins.manager import PluginManager
+from app.plugins.manifest import PluginManifest
 from app.plugins.plugin import Plugin
 
 
 def test_plugin_manager_registers_plugins():
     manager = PluginManager()
-    plugin = Plugin(name="core", description="Core plugin")
+    plugin = Plugin(
+        manifest=PluginManifest(
+            name="core",
+            version="1.0.0",
+            description="Core plugin",
+        )
+    )
 
     manager.register(plugin)
 
@@ -19,7 +26,11 @@ def test_plugin_manager_collects_plugin_items():
     topic = object()
 
     plugin = Plugin(
-        name="core",
+        manifest=PluginManifest(
+            name="core",
+            version="1.0.0",
+            description="Core plugin",
+        ),
         analyses=[analysis],
         validators=[validator],
         installers=[installer],

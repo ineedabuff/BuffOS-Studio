@@ -14,20 +14,41 @@ class PluginManager:
         return self._plugins
 
     def analyses(self) -> list[object]:
-        return [analysis for plugin in self._plugins for analysis in plugin.analyses]
+        analyses: list[object] = []
+
+        for plugin in self._plugins:
+            analyses.extend(plugin.analyses)
+
+        return analyses
 
     def validators(self) -> list[object]:
-        return [
-            validator for plugin in self._plugins for validator in plugin.validators
-        ]
+        validators: list[object] = []
+
+        for plugin in self._plugins:
+            validators.extend(plugin.validators)
+
+        return validators
 
     def installers(self) -> list[object]:
-        return [
-            installer for plugin in self._plugins for installer in plugin.installers
-        ]
+        installers: list[object] = []
+
+        for plugin in self._plugins:
+            installers.extend(plugin.installers)
+
+        return installers
 
     def commands(self) -> list[object]:
-        return [command for plugin in self._plugins for command in plugin.commands]
+        commands: list[object] = []
+
+        for plugin in self._plugins:
+            commands.extend(plugin.commands)
+
+        return commands
 
     def learn_topics(self) -> list[object]:
-        return [topic for plugin in self._plugins for topic in plugin.learn_topics]
+        topics: list[object] = []
+
+        for plugin in self._plugins:
+            topics.extend(plugin.learn_topics)
+
+        return topics
