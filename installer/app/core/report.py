@@ -24,11 +24,26 @@ class Report:
     def readiness(self) -> int:
         validation = ValidationReport()
 
-        for result in self._results:
-            if result.title not in self.EXCLUDED_FROM_READINESS:
-                validation.add(result)
+        for result in self.validation_results:
+            validation.add(result)
 
         return ReadinessScore().calculate(validation)
+
+    @property
+    def validation_results(self) -> list[CheckResult]:
+        return [
+            result
+            for result in self._results
+            if result.title not in self.EXCLUDED_FROM_READINESS
+        ]
+
+    @property
+    def passed(self) -> int:
+        return sum(result.success for result in self.validation_results)
+
+    @property
+    def failed(self) -> int:
+        return len(self.validation_results) - self.passed
 
     @property
     def status(self) -> str:
@@ -42,22 +57,14 @@ class Report:
         print("System Analysis")
         print("----------------------------------------")
 
-        passed = 0
-        failed = 0
-
         for result in self._results:
             print(
                 f"{'✓' if result.success else '✗'} {result.title:<20} {result.message}"
             )
 
-            if result.success:
-                passed += 1
-            else:
-                failed += 1
-
         print("----------------------------------------")
-        print(f"Passed: {passed}")
-        print(f"Failed: {failed}")
+        print(f"Passed: {self.passed}")
+        print(f"Failed: {self.failed}")
         print()
         print(f"BuffOS Readiness: {self.readiness}%")
         print(f"Status: {self.status}")
