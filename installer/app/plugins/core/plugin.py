@@ -44,3 +44,6 @@ class CorePlugin(Plugin):
                 GrubBtrfsValidator(),
             ],
         )
+
+
+PLUGIN = CorePlugin

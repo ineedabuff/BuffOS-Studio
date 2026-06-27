@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import importlib
+import pkgutil
+
+import app.plugins
 from app.plugins.plugin import Plugin
 
 
@@ -9,6 +13,25 @@ class PluginManager:
 
     def register(self, plugin: Plugin) -> None:
         self._plugins.append(plugin)
+
+    def discover(self) -> None:
+        for module_info in pkgutil.iter_modules(app.plugins.__path__):
+            if module_info.name.startswith("_"):
+                continue
+
+            module_name = f"app.plugins.{module_info.name}.plugin"
+
+            try:
+                module = importlib.import_module(module_name)
+            except ModuleNotFoundError:
+                continue
+
+            plugin_class = getattr(module, "PLUGIN", None)
+
+            if plugin_class is None:
+                continue
+
+            self.register(plugin_class())
 
     def all(self) -> list[Plugin]:
         return self._plugins
