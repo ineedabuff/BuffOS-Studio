@@ -1,3 +1,3 @@
-VERSION = "0.2.0-dev"
+from app.identity import APP_NAME, VERSION
 
-APP_NAME = "BuffOS Studio"
+__all__ = ["APP_NAME", "VERSION"]

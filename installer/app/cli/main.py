@@ -3,11 +3,11 @@ from __future__ import annotations
 import argparse
 
 from app.cli.modules import create_runner
-from app.version import APP_NAME, VERSION
+from app.identity import APP_CLI, APP_NAME, VERSION
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="buffos")
+    parser = argparse.ArgumentParser(prog=APP_CLI)
 
     sub = parser.add_subparsers(dest="command")
 

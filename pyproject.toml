@@ -5,6 +5,7 @@ description = "BuffOS Studio installer"
 requires-python = ">=3.14"
 
 [project.scripts]
+buff = "app.cli.main:main"
 buffos = "app.cli.main:main"
 
 [tool.setuptools]
