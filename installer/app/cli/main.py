@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 
 from app.cli.modules import create_runner
+from app.version import APP_NAME, VERSION
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -23,7 +24,8 @@ def main() -> None:
 
     match args.command:
         case "version":
-            print("BuffOS Studio 0.1.0")
+            print(APP_NAME)
+            print(f"Version {VERSION}")
 
         case "analyze":
             create_runner(dry_run=True).execute()
