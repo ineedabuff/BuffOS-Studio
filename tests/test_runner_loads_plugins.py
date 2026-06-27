@@ -1,15 +1,13 @@
-from __future__ import annotations
-
 from app.core.runner import Runner
 from app.plugins.core.plugin import CorePlugin
 from app.plugins.manager import PluginManager
 
 
-def create_runner(dry_run: bool = False) -> Runner:
+def test_runner_loads_plugin_analyses():
     manager = PluginManager()
     manager.register(CorePlugin())
 
-    runner = Runner(dry_run=dry_run)
+    runner = Runner()
     runner.load(manager)
 
-    return runner
+    assert len(runner.modules) == 9

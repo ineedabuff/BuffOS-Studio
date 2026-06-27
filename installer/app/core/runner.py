@@ -53,6 +53,10 @@ class Runner:
     def register(self, module: Module) -> None:
         self.modules.append(module)
 
+    def load(self, manager) -> None:
+        for analysis in manager.analyses():
+            self.register(analysis)
+
     def execute(self) -> None:
         logger.info("Starting installation...")
 
