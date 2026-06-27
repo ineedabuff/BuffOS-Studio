@@ -1,0 +1,19 @@
+from __future__ import annotations
+
+from app.plugins.manifest import PluginManifest
+from app.plugins.plugin import Plugin
+
+
+class {{ class_name }}(Plugin):
+    def __init__(self) -> None:
+        super().__init__(
+            manifest=PluginManifest(
+                id="{{ id }}",
+                name="{{ name }}",
+                version="0.1.0",
+                description="{{ description }}",
+            ),
+        )
+
+
+PLUGIN = {{ class_name }}
