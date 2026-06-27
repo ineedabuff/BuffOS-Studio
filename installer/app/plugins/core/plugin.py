@@ -21,7 +21,8 @@ class CorePlugin(Plugin):
     def __init__(self) -> None:
         super().__init__(
             manifest=PluginManifest(
-                name="core",
+                id="core",
+                name="Core",
                 version="1.0.0",
                 description="Core Buff Helper plugin",
             ),

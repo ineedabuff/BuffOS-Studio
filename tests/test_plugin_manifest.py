@@ -4,14 +4,18 @@ from app.plugins.plugin import Plugin
 
 def test_plugin_manifest():
     manifest = PluginManifest(
-        name="core",
+        id="core",
+        name="Core",
         version="1.0.0",
         description="Core plugin",
     )
 
     plugin = Plugin(manifest=manifest)
 
-    assert plugin.name == "core"
+    assert plugin.id == "core"
+    assert plugin.name == "Core"
     assert plugin.version == "1.0.0"
     assert plugin.description == "Core plugin"
+    assert plugin.author == "Buff Helper Project"
+    assert plugin.license == "MIT"
     assert plugin.enabled is True

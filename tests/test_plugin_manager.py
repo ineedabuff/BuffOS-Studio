@@ -7,7 +7,8 @@ def test_plugin_manager_registers_plugins():
     manager = PluginManager()
     plugin = Plugin(
         manifest=PluginManifest(
-            name="core",
+            id="core",
+            name="Core",
             version="1.0.0",
             description="Core plugin",
         )
@@ -27,7 +28,8 @@ def test_plugin_manager_collects_plugin_items():
 
     plugin = Plugin(
         manifest=PluginManifest(
-            name="core",
+            id="core",
+            name="Core",
             version="1.0.0",
             description="Core plugin",
         ),

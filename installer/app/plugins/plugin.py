@@ -16,6 +16,10 @@ class Plugin:
     learn_topics: list[Any] = field(default_factory=list)
 
     @property
+    def id(self) -> str:
+        return self.manifest.id
+
+    @property
     def name(self) -> str:
         return self.manifest.name
 
@@ -26,6 +30,18 @@ class Plugin:
     @property
     def version(self) -> str:
         return self.manifest.version
+
+    @property
+    def author(self) -> str:
+        return self.manifest.author
+
+    @property
+    def license(self) -> str:
+        return self.manifest.license
+
+    @property
+    def homepage(self) -> str:
+        return self.manifest.homepage
 
     @property
     def enabled(self) -> bool:
