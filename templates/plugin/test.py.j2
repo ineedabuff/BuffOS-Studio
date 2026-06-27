@@ -1,0 +1,7 @@
+from app.plugins.{{ id }}.plugin import {{ class_name }}
+
+
+def test_plugin():
+    plugin = {{ class_name }}()
+
+    assert plugin.id == "{{ id }}"
