@@ -1,103 +1,16 @@
-# 🚀 BuffOS Studio
+# Buff Helper
 
-**BuffOS Studio** est un framework open source qui transforme une installation standard d'Ubuntu Studio en une station de travail moderne, optimisée pour :
+> Understand before you automate.
 
-- 🎮 Gaming
-- 🎨 Création de contenu
-- 🔎 OSINT / Recherche
-- 💻 Développement
+Buff Helper is a plugin-driven Linux assistant.
 
----
+It helps users analyze, repair, optimize and learn from their systems.
 
-## Objectifs
+## Quick Start
 
-- Installation simple
-- Système reproductible
-- Snapshots Btrfs automatiques
-- Restauration rapide
-- Personnalisation KDE
-- Optimisations NVIDIA
-- Gestion centralisée via Buff Control Center
+Run bootstrap, then analyze your system.
 
----
+## Documentation
 
-## Fonctionnalités prévues
-
-### Système
-
-- Btrfs optimisé
-- Compression ZSTD
-- Sous-volumes
-- Swapfile
-- Optimisations SSD
-
-### Protection
-
-- Timeshift
-- grub-btrfs
-- Snapshots automatiques
-- Sauvegarde et restauration
-
-### Gaming
-
-- Steam
-- Proton GE
-- PortProton
-- Lutris
-- Heroic
-- MangoHud
-- Gamescope
-- GameMode
-
-### Création
-
-- OBS Studio
-- Kdenlive
-- GIMP
-- Krita
-- Blender
-- Inkscape
-
-### KDE
-
-- Thème Buff
-- Icônes
-- Konsole
-- Fastfetch
-- Fonds d'écran
-
----
-
-## Architecture
-
-```
-BuffOS-Studio/
-
-installer/
-control-center/
-assets/
-docs/
-scripts/
-tests/
-```
-
----
-
-## Roadmap
-
-- [x] Base du projet
-- [x] Structure Git
-- [ ] Framework Python
-- [ ] Module Btrfs
-- [ ] Module Snapshots
-- [ ] Module NVIDIA
-- [ ] Module Gaming
-- [ ] Module KDE
-- [ ] Buff Control Center
-- [ ] Version 1.0
-
----
-
-## Licence
-
-GPL v3
+- English: docs/en/README.md
+- Français: docs/fr/README.md
