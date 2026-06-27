@@ -57,6 +57,10 @@ class Runner:
         for analysis in manager.analyses():
             self.register(analysis)
 
+        self.validator_runner = ValidatorRunner()
+        for validator in manager.validators():
+            self.validator_runner.register(validator)
+
     def execute(self) -> None:
         logger.info("Starting installation...")
 
