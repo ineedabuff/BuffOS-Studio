@@ -1,74 +1,39 @@
-# BuffOS Studio Roadmap
+# Buff Helper Roadmap
 
-## Vision
+## v0.3
 
-Build the best open-source Linux workstation provisioning platform.
+- Identity
+- CLI
+- Platform detection
+- Installation engine
 
----
+## v0.4
 
-# Milestone 1 — Engine
+- Plugin system
+- Doctor
+- Learn
 
-- [ ] Engine
-- [ ] Application
-- [ ] Runner
-- [ ] Report
-- [ ] Event Bus
+## v0.5
 
----
+- Rich TUI
+- Interactive reports
+- Themes
 
-# Milestone 2 — Analysis
+## v0.6
 
-- [ ] Operating System
-- [ ] Firmware
-- [ ] Secure Boot
-- [ ] Filesystem
-- [ ] Btrfs
-- [ ] Subvolumes
-- [ ] GPU
-- [ ] Network
+- Profiles
+- Gaming
+- Developer
+- Creator
 
----
+## v0.7
 
-# Milestone 3 — Provisioning
+- Qt GUI
+- Plugin Manager
 
-- [ ] Btrfs
-- [ ] Timeshift
-- [ ] grub-btrfs
-- [ ] Snapshots
+## v1.0
 
----
-
-# Milestone 4 — Drivers
-
-- [ ] NVIDIA
-- [ ] Intel
-- [ ] Firmware
-
----
-
-# Milestone 5 — Gaming
-
-- [ ] Steam
-- [ ] Heroic
-- [ ] Lutris
-- [ ] Proton GE
-- [ ] MangoHud
-- [ ] Gamescope
-
----
-
-# Milestone 6 — KDE
-
-- [ ] Theme
-- [ ] Wallpapers
-- [ ] Fastfetch
-- [ ] Konsole
-
----
-
-# Milestone 7 — Buff Control Center
-
-- [ ] GUI
-- [ ] Diagnostics
-- [ ] Restore
-- [ ] Updates
+- Stable release
+- Documentation
+- CI/CD
+- Packages
