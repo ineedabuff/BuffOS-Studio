@@ -1,35 +1,17 @@
-id:
-name:
-category:
-description:
-homepage:
-icon:
-
-recommended: false
-beginner: true
+id: string
+name: string
+category: string
+description: string
+homepage: string
+recommended: boolean
+beginner: boolean
 
 install:
-  apt:
-  flatpak:
-  snap:
-  appimage:
-  script:
+  apt: string
+  flatpak: string
+  snap: string
+  script: string
 
-depends: []
-
-conflicts: []
-
-supports:
-  ubuntu: true
-  debian: true
-  fedora: true
-  arch: true
-  opensuse: true
-
-post_install: []
-
-doctor: []
-
-apply: []
-
-tags: []
+depends: list
+alternatives: list
+tags: list

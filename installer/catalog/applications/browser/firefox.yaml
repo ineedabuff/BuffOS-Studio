@@ -1,0 +1,18 @@
+id: firefox
+name: Firefox
+category: browser
+description: Free and open-source web browser
+homepage: https://www.mozilla.org/firefox
+recommended: true
+beginner: true
+install:
+  apt: firefox
+  flatpak: org.mozilla.firefox
+  snap: firefox
+depends: []
+alternatives:
+  - librewolf
+  - floorp
+tags:
+  - browser
+  - open-source

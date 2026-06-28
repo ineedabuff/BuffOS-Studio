@@ -1,0 +1,15 @@
+id: discord
+name: Discord
+category: communication
+description: Official Discord client
+homepage: https://discord.com
+recommended: false
+beginner: true
+install:
+  flatpak: com.discordapp.Discord
+depends: []
+alternatives:
+  - vesktop
+tags:
+  - discord
+  - communication
