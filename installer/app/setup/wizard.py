@@ -4,6 +4,7 @@ from pathlib import Path
 
 from app.setup.answers import AnswerSet
 from app.setup.confirm import confirm
+from app.setup.installer import install_selection
 from app.setup.interactive import ask
 from app.setup.profile_writer import write_profile
 from app.setup.questionnaire import build_questions
@@ -35,6 +36,9 @@ def run() -> None:
             Path.home() / ".config" / "buff-helper" / "profile.yaml",
         )
         print(f"✓ Profile saved: {profile}")
-        print("✓ Installation accepted")
+
+        install_selection(selection)
+
+        print("✓ Installation completed")
     else:
         print("Installation cancelled")
