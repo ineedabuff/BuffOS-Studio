@@ -30,23 +30,27 @@ class SubprocessProvider:
         )
 
 
-class BtrfsCheck(BaseCheck):
-    id = "btrfs"
-    title = "Btrfs"
+class SubvolumesCheck(BaseCheck):
+    id = "btrfs_subvolumes"
+    title = "Btrfs subvolumes"
     category = "storage"
+    required = ["@", "@home"]
 
     def __init__(self, provider: CommandProvider | None = None) -> None:
         self.provider = provider or SubprocessProvider()
 
     def run(self) -> CheckResult:
         result = self.provider.run(
-            ["findmnt", "-no", "FSTYPE", "/"],
+            ["btrfs", "subvolume", "list", "/"],
             check=False,
         )
+
+        found = result.stdout
+        passed = all(f"path {subvolume}" in found for subvolume in self.required)
 
         return CheckResult(
             id=self.id,
             title=self.title,
-            passed=result.stdout.strip() == "btrfs",
+            passed=passed,
             fixable=self.fixable,
         )
