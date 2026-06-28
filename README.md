@@ -8,7 +8,11 @@
 
 ## Use
 
+    ./buff-helper doctor
+    ./buff-helper setup
+    ./buff-helper wizard
+
+## Developer
+
     source .venv/bin/activate
-    PYTHONPATH=installer python -m app.cli.main doctor
-    PYTHONPATH=installer python -m app.cli.main setup
-    PYTHONPATH=installer python -m app.cli.main wizard
+    ./dev.sh
