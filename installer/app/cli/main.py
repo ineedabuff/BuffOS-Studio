@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from app.cli.doctor import run_doctor
 from app.cli.modules import create_runner
 from app.generators.terminal.generator import (
     generate_bash,
@@ -19,6 +20,7 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("version", help="Show version")
     sub.add_parser("analyze", help="Analyze only")
     sub.add_parser("apply", help="Analyze and repair")
+    sub.add_parser("doctor", help="Run Buff Helper doctor")
 
     generate = sub.add_parser("generate", help="Generate configuration files")
     generate.add_argument(
@@ -43,6 +45,9 @@ def main() -> None:
 
         case "apply":
             create_runner().execute()
+
+        case "doctor":
+            run_doctor()
 
         case "generate":
             if args.target == "terminal":
