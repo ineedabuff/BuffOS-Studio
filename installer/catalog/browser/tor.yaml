@@ -1,0 +1,8 @@
+id: tor
+name: Tor Browser
+category: browser
+homepage: https://www.torproject.org
+recommended: false
+
+install:
+  flatpak: com.github.micahflee.torbrowser-launcher

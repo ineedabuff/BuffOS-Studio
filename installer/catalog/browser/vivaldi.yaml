@@ -1,0 +1,8 @@
+id: vivaldi
+name: Vivaldi
+category: browser
+homepage: https://vivaldi.com
+recommended: false
+
+install:
+  script: vivaldi.sh

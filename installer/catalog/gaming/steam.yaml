@@ -1,0 +1,7 @@
+id: steam
+name: Steam
+category: gaming
+recommended: true
+install:
+  apt: steam-installer
+  flatpak: com.valvesoftware.Steam

@@ -1,0 +1,7 @@
+id: brave
+name: Brave
+category: browser
+install:
+  apt:
+  flatpak: com.brave.Browser
+recommended: false

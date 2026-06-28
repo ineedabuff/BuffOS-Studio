@@ -1,0 +1,6 @@
+id: vscodium
+name: VSCodium
+category: development
+recommended: false
+install:
+  flatpak: com.vscodium.codium

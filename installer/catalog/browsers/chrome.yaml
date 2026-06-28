@@ -1,0 +1,9 @@
+id: chrome
+name: Google Chrome
+category: browser
+install:
+  apt:
+  flatpak:
+  snap:
+  script: chrome.sh
+recommended: true

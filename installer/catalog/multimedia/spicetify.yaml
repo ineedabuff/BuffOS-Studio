@@ -1,0 +1,8 @@
+id: spicetify
+name: Spicetify
+category: multimedia
+recommended: true
+depends:
+  - spotify
+install:
+  script: spicetify.sh

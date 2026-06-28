@@ -1,0 +1,7 @@
+id: chromium
+name: Chromium
+category: browser
+install:
+  apt: chromium-browser
+  flatpak: org.chromium.Chromium
+recommended: false

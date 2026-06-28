@@ -1,0 +1,8 @@
+id: spotify
+name: Spotify
+category: multimedia
+recommended: true
+install:
+  flatpak: com.spotify.Client
+post_install:
+  - spicetify

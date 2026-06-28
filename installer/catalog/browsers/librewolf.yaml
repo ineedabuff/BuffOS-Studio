@@ -1,0 +1,6 @@
+id: librewolf
+name: LibreWolf
+category: browser
+install:
+  flatpak: io.gitlab.librewolf-community
+recommended: false

@@ -1,0 +1,8 @@
+id: communication-pack
+name: Communication Essentials
+
+bundle:
+  - vesktop
+  - discord
+  - telegram
+  - signal

@@ -1,0 +1,8 @@
+id: opera
+name: Opera
+category: browser
+homepage: https://opera.com
+recommended: false
+
+install:
+  script: opera.sh

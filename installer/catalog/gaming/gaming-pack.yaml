@@ -1,0 +1,12 @@
+id: gaming-pack
+name: Gaming Essentials
+
+bundle:
+  - steam
+  - heroic
+  - lutris
+  - bottles
+  - portproton
+  - mangohud
+  - gamemode
+  - goverlay

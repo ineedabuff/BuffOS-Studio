@@ -1,0 +1,6 @@
+id: floorp
+name: Floorp
+category: browser
+install:
+  flatpak: one.ablaze.floorp
+recommended: false

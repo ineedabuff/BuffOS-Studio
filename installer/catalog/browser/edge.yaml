@@ -1,0 +1,13 @@
+id: edge
+name: Microsoft Edge
+category: browser
+description: Microsoft web browser
+homepage: https://www.microsoft.com/edge
+recommended: false
+beginner: true
+
+install:
+  script: edge.sh
+
+tags:
+  - browser

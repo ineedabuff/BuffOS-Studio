@@ -1,0 +1,7 @@
+id: vesktop
+name: Vesktop
+category: communication
+description: Discord client with Vencord built-in
+recommended: true
+install:
+  flatpak: dev.vencord.Vesktop

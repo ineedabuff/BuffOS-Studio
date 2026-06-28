@@ -1,0 +1,6 @@
+id: zen
+name: Zen Browser
+category: browser
+install:
+  flatpak: app.zen_browser.zen
+recommended: false

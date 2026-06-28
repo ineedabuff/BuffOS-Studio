@@ -1,0 +1,6 @@
+id: chatgpt
+name: ChatGPT
+category: ai
+recommended: true
+install:
+  pwa: https://chatgpt.com

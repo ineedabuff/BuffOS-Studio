@@ -1,0 +1,8 @@
+id: firefox
+name: Firefox
+category: browser
+install:
+  apt: firefox
+  flatpak: org.mozilla.firefox
+  snap: firefox
+recommended: true

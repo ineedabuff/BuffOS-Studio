@@ -1,0 +1,16 @@
+id: browser-pack
+name: Popular Browsers
+category: browser
+description: Install every major browser
+
+bundle:
+  - chrome
+  - firefox
+  - brave
+  - edge
+  - opera
+  - vivaldi
+  - zen
+  - floorp
+  - librewolf
+  - chromium

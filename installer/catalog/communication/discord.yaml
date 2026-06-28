@@ -1,0 +1,7 @@
+id: discord
+name: Discord
+category: communication
+description: Official Discord client
+recommended: false
+install:
+  flatpak: com.discordapp.Discord

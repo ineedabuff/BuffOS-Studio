@@ -1,0 +1,8 @@
+id: ai-pack
+name: AI Essentials
+
+bundle:
+  - chatgpt
+  - claude
+  - gemini
+  - ollama

@@ -1,0 +1,35 @@
+id:
+name:
+category:
+description:
+homepage:
+icon:
+
+recommended: false
+beginner: true
+
+install:
+  apt:
+  flatpak:
+  snap:
+  appimage:
+  script:
+
+depends: []
+
+conflicts: []
+
+supports:
+  ubuntu: true
+  debian: true
+  fedora: true
+  arch: true
+  opensuse: true
+
+post_install: []
+
+doctor: []
+
+apply: []
+
+tags: []

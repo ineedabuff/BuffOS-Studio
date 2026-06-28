@@ -1,0 +1,6 @@
+id: heroic
+name: Heroic Games Launcher
+category: gaming
+recommended: false
+install:
+  flatpak: com.heroicgameslauncher.hgl

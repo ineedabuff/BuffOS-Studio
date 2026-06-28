@@ -1,0 +1,6 @@
+id: portproton
+name: PortProton
+category: gaming
+recommended: true
+install:
+  flatpak: ru.linux_gaming.PortProton
