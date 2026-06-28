@@ -1,0 +1,3 @@
+assets/scripts/install-buff-term.sh
+assets/scripts/install-buff-zsh.sh
+assets/scripts/install-buff-extras.sh
