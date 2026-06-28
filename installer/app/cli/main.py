@@ -5,6 +5,7 @@ from pathlib import Path
 
 from app.cli.apply.gaming import run as apply_gaming
 from app.cli.apply.nvidia import run as apply_nvidia
+from app.cli.apply.terminal import run as apply_terminal
 from app.cli.doctor import run_doctor
 from app.cli.modules import create_runner
 from app.generators.terminal.generator import (
@@ -29,6 +30,7 @@ def build_parser() -> argparse.ArgumentParser:
         choices=[
             "gaming",
             "nvidia",
+            "terminal",
         ],
     )
 
@@ -59,6 +61,8 @@ def main() -> None:
                     apply_gaming()
                 case "nvidia":
                     apply_nvidia()
+                case "terminal":
+                    apply_terminal()
                 case _:
                     create_runner().execute()
 
