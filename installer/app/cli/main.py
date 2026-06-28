@@ -12,12 +12,12 @@ from app.generators.terminal.generator import (
     generate_zsh,
 )
 from app.identity import APP_CLI, APP_NAME, VERSION
+from app.install_engine.engine import InstallEngine
 from app.setup.wizard import run as wizard_run
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog=APP_CLI)
-
     sub = parser.add_subparsers(dest="command")
 
     sub.add_parser("version", help="Show version")
@@ -25,13 +25,11 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("setup", help="Configure this computer")
     sub.add_parser("wizard", help="Run interactive setup wizard")
 
+    install = sub.add_parser("install", help="Install an application from catalog")
+    install.add_argument("app_id")
+
     apply = sub.add_parser("apply", help="Apply profile")
-    apply.add_argument(
-        "target",
-        nargs="?",
-        default=None,
-        choices=["buff"],
-    )
+    apply.add_argument("target", nargs="?", default=None, choices=["buff"])
 
     doctor = sub.add_parser("doctor", help="Run doctor")
     doctor.add_argument("--json", action="store_true")
@@ -59,6 +57,9 @@ def main() -> None:
 
         case "wizard":
             wizard_run()
+
+        case "install":
+            InstallEngine().install(args.app_id)
 
         case "doctor":
             run_doctor(json_output=args.json)
