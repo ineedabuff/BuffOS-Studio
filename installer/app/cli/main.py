@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from app.cli.apply.gaming import run as apply_gaming
 from app.cli.doctor import run_doctor
 from app.cli.modules import create_runner
 from app.generators.terminal.generator import (
@@ -19,20 +20,19 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("version", help="Show version")
     sub.add_parser("analyze", help="Analyze only")
-    sub.add_parser("apply", help="Analyze and repair")
+
+    apply = sub.add_parser("apply", help="Apply fixes")
+    apply.add_argument(
+        "target",
+        nargs="?",
+        choices=["gaming"],
+    )
 
     doctor = sub.add_parser("doctor", help="Run system doctor")
-    doctor.add_argument(
-        "--json",
-        action="store_true",
-        help="Output JSON report",
-    )
+    doctor.add_argument("--json", action="store_true")
 
     generate = sub.add_parser("generate", help="Generate configuration files")
-    generate.add_argument(
-        "target",
-        choices=["terminal"],
-    )
+    generate.add_argument("target", choices=["terminal"])
 
     return parser
 
@@ -50,16 +50,18 @@ def main() -> None:
             create_runner(dry_run=True).execute()
 
         case "apply":
-            create_runner().execute()
+            if args.target == "gaming":
+                apply_gaming()
+            else:
+                create_runner().execute()
 
         case "doctor":
             run_doctor(json_output=args.json)
 
         case "generate":
-            if args.target == "terminal":
-                generate_bash(Path.home() / ".bashrc")
-                generate_zsh(Path.home() / ".zshrc")
-                print("✓ Buff terminal generated")
+            generate_bash(Path.home() / ".bashrc")
+            generate_zsh(Path.home() / ".zshrc")
+            print("✓ Buff terminal generated")
 
         case _:
             parser.print_help()
