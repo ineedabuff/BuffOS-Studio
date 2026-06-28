@@ -42,3 +42,4 @@ dist/
 tmp/
 .cache/
 *.egg-info/
+grub-btrfs/
