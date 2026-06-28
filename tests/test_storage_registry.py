@@ -1,5 +1,6 @@
 from app.plugins.storage.checks import (
     BtrfsCheck,
+    GrubBtrfsCheck,
     MountOptionsCheck,
     SubvolumesCheck,
     TimeshiftCheck,
@@ -13,4 +14,5 @@ def test_storage_registry():
         SubvolumesCheck,
         MountOptionsCheck,
         TimeshiftCheck,
+        GrubBtrfsCheck,
     ]
