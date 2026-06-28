@@ -11,7 +11,28 @@ def test_execute_plan():
         scripts=["install-buff-zsh.sh"],
     )
 
-    with patch("subprocess.run") as run:
+    with (
+        patch("app.install_engine.executor.apt_installed", return_value=False),
+        patch("app.install_engine.executor.flatpak_installed", return_value=False),
+        patch("subprocess.run") as run,
+    ):
         execute_plan(plan)
 
     assert run.call_count == 3
+
+
+def test_execute_plan_skips_installed_items():
+    plan = InstallPlan(
+        apt=["git"],
+        flatpak=["org.mozilla.firefox"],
+        scripts=[],
+    )
+
+    with (
+        patch("app.install_engine.executor.apt_installed", return_value=True),
+        patch("app.install_engine.executor.flatpak_installed", return_value=True),
+        patch("subprocess.run") as run,
+    ):
+        execute_plan(plan)
+
+    run.assert_not_called()

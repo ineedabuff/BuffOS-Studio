@@ -4,16 +4,23 @@ import subprocess
 from pathlib import Path
 
 from app.install_engine.plan import InstallPlan
+from app.install_engine.status import apt_installed, flatpak_installed
 
 
 def execute_plan(plan: InstallPlan) -> None:
-    if plan.apt:
+    missing_apt = [package for package in plan.apt if not apt_installed(package)]
+
+    if missing_apt:
         subprocess.run(
-            ["sudo", "apt", "install", "-y", *plan.apt],
+            ["sudo", "apt", "install", "-y", *missing_apt],
             check=False,
         )
 
     for app in plan.flatpak:
+        if flatpak_installed(app):
+            print(f"✓ {app}")
+            continue
+
         subprocess.run(
             ["flatpak", "install", "-y", "flathub", app],
             check=False,
