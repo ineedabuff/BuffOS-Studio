@@ -1,0 +1,32 @@
+# Buff Prompt for Zsh
+
+autoload -Uz colors && colors
+
+BUFF_BORDER="%F{#FF3131}"
+BUFF_SUCCESS="%F{#00FF66}"
+BUFF_FAILURE="%F{#FF3131}"
+BUFF_USER="%F{#FFFFFF}"
+BUFF_AT="%F{#DDFF24}"
+BUFF_HOST="%F{#1F51FF}"
+BUFF_IP="%F{#FFFFFF}"
+BUFF_TIME="%F{#DDFF24}"
+BUFF_PATH="%F{#0FFF50}"
+BUFF_PROMPT="%F{#0FFF50}"
+BUFF_RESET="%f"
+
+buff_ip() {
+    ip route get 1.1.1.1 2>/dev/null | awk '{print $7; exit}'
+}
+
+buff_status() {
+    if [[ $? -eq 0 ]]; then
+        echo "${BUFF_SUCCESS}✔${BUFF_RESET}"
+    else
+        echo "${BUFF_FAILURE}✗${BUFF_RESET}"
+    fi
+}
+
+setopt PROMPT_SUBST
+
+PROMPT='${BUFF_BORDER}┌─[$(buff_status)${BUFF_BORDER}]─[${BUFF_USER}%n${BUFF_AT}@${BUFF_HOST}%m${BUFF_BORDER}]─[${BUFF_IP}$(buff_ip)${BUFF_BORDER}]─[${BUFF_TIME}%D{%H:%M:%S}${BUFF_BORDER}]─[${BUFF_PATH}%~${BUFF_BORDER}]
+${BUFF_BORDER}└──╼ ${BUFF_PROMPT}$ ${BUFF_RESET}'

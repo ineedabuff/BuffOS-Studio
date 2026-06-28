@@ -1,0 +1,12 @@
+{
+  "name": "Buff Prompt",
+  "shells": ["bash", "zsh"],
+  "segments": [
+    "status",
+    "user",
+    "host",
+    "ip",
+    "time",
+    "path"
+  ]
+}
