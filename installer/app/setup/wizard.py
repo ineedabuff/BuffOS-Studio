@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from app.catalog.recommendations import recommended
+from app.setup.menu import show
+from app.setup.questionnaire import build_questions
 
 
 def run() -> None:
@@ -8,11 +9,6 @@ def run() -> None:
     print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
     print("        Linux Setup Assistant")
     print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-    print()
-    print("Recommended applications")
-    print()
 
-    for entry in recommended():
-        print(f"✓ {entry.name} [{entry.category}]")
-
-    print()
+    for question in build_questions():
+        show(question)
