@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from app.install_engine.engine import _read_yaml_value
+from app.install_engine.parser import read_yaml_value
 from app.install_engine.plan import InstallPlan
 from app.setup.selection import Selection
 
@@ -13,9 +13,9 @@ def create_plan(selection: Selection) -> InstallPlan:
     for entry in selection.entries:
         text = entry.path.read_text(encoding="utf-8")
 
-        apt_package = _read_yaml_value(text, "apt")
-        flatpak_app = _read_yaml_value(text, "flatpak")
-        script = _read_yaml_value(text, "script")
+        apt_package = read_yaml_value(text, "apt")
+        flatpak_app = read_yaml_value(text, "flatpak")
+        script = read_yaml_value(text, "script")
 
         if apt_package:
             apt.append(apt_package)

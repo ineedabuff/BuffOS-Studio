@@ -1,27 +1,9 @@
 from __future__ import annotations
 
-import subprocess
-from pathlib import Path
-
 from app.catalog.search import find_by_id
-
-
-def _read_yaml_value(text: str, key: str) -> str:
-    lines = text.splitlines()
-
-    for index, line in enumerate(lines):
-        if line.strip() == "install:":
-            for child in lines[index + 1 :]:
-                if child and not child.startswith(" "):
-                    break
-
-                stripped = child.strip()
-                prefix = f"{key}:"
-
-                if stripped.startswith(prefix):
-                    return stripped.replace(prefix, "", 1).strip()
-
-    return ""
+from app.install_engine.executor import execute_plan
+from app.install_engine.planner import create_plan
+from app.setup.selection import Selection
 
 
 class InstallEngine:
@@ -32,32 +14,9 @@ class InstallEngine:
             print(f"✗ Unknown application: {app_id}")
             return False
 
-        text = entry.path.read_text(encoding="utf-8")
-
-        apt = _read_yaml_value(text, "apt")
-        flatpak = _read_yaml_value(text, "flatpak")
-        script = _read_yaml_value(text, "script")
-
         print(f"== Installing {entry.name} ==")
 
-        if flatpak:
-            subprocess.run(
-                ["flatpak", "install", "-y", "flathub", flatpak],
-                check=False,
-            )
-            return True
+        plan = create_plan(Selection([entry]))
+        execute_plan(plan)
 
-        if apt:
-            subprocess.run(
-                ["sudo", "apt", "install", "-y", apt],
-                check=False,
-            )
-            return True
-
-        if script:
-            path = Path("installer/assets/scripts") / script
-            subprocess.run(["bash", str(path)], check=False)
-            return True
-
-        print(f"✗ No install method for {entry.name}")
-        return False
+        return True
