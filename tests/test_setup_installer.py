@@ -10,7 +10,7 @@ def test_install_selection():
 
     assert firefox is not None
 
-    with patch("app.install_engine.engine.InstallEngine.install") as install:
+    with patch("app.setup.installer.run_plan") as run_plan:
         install_selection(Selection([firefox]))
 
-    install.assert_called_once_with("firefox")
+    run_plan.assert_called_once()

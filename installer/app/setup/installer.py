@@ -1,11 +1,8 @@
 from __future__ import annotations
 
-from app.install_engine.engine import InstallEngine
+from app.install_engine.plan_runner import run_plan
 from app.setup.selection import Selection
 
 
 def install_selection(selection: Selection) -> None:
-    engine = InstallEngine()
-
-    for entry in selection.entries:
-        engine.install(entry.id)
+    run_plan(selection)
