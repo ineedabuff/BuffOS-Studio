@@ -10,12 +10,13 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 python -m pip install --upgrade pip
-python -m pip install -e .
+
+chmod +x buff-helper
 
 echo
 echo "✓ Buff Helper installed"
 echo
 echo "Run:"
-echo "  source .venv/bin/activate"
-echo "  PYTHONPATH=installer python -m app.cli.main doctor"
-echo "  PYTHONPATH=installer python -m app.cli.main setup"
+echo "  ./buff-helper doctor"
+echo "  ./buff-helper setup"
+echo "  ./buff-helper wizard"
