@@ -1,4 +1,4 @@
-from app.checks.storage.btrfs import BtrfsCheck
+from app.plugins.storage.checks.btrfs import BtrfsCheck
 
 
 class FakeProvider:
