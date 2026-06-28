@@ -1,7 +1,14 @@
 from __future__ import annotations
 
-from app.setup.menu import show
+from pathlib import Path
+
+from app.setup.answers import AnswerSet
+from app.setup.confirm import confirm
+from app.setup.interactive import ask
+from app.setup.profile_writer import write_profile
 from app.setup.questionnaire import build_questions
+from app.setup.resolver import resolve_answers
+from app.setup.summary import render_summary
 
 
 def run() -> None:
@@ -10,5 +17,24 @@ def run() -> None:
     print("        Linux Setup Assistant")
     print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 
+    selected: dict[str, list[str]] = {}
+
     for question in build_questions():
-        show(question)
+        answers = ask(question)
+        selected.update(answers.selected)
+
+    selection = resolve_answers(AnswerSet(selected))
+
+    print()
+    print(render_summary(selection))
+    print()
+
+    if confirm():
+        profile = write_profile(
+            selection,
+            Path.home() / ".config" / "buff-helper" / "profile.yaml",
+        )
+        print(f"✓ Profile saved: {profile}")
+        print("✓ Installation accepted")
+    else:
+        print("Installation cancelled")
