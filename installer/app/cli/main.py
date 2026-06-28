@@ -12,6 +12,7 @@ from app.generators.terminal.generator import (
     generate_zsh,
 )
 from app.identity import APP_CLI, APP_NAME, VERSION
+from app.setup.wizard import run as wizard_run
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -22,6 +23,7 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("version", help="Show version")
     sub.add_parser("analyze", help="Analyze only")
     sub.add_parser("setup", help="Configure this computer")
+    sub.add_parser("wizard", help="Run interactive setup wizard")
 
     apply = sub.add_parser("apply", help="Apply profile")
     apply.add_argument(
@@ -54,6 +56,9 @@ def main() -> None:
 
         case "setup":
             setup_run()
+
+        case "wizard":
+            wizard_run()
 
         case "doctor":
             run_doctor(json_output=args.json)
