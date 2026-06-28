@@ -1,0 +1,13 @@
+{
+  "background": "#000000",
+  "border": "#FF3131",
+  "success": "#00FF66",
+  "failure": "#FF3131",
+  "user": "#FFFFFF",
+  "at": "#DDFF24",
+  "host": "#1F51FF",
+  "ip": "#FFFFFF",
+  "time": "#DDFF24",
+  "path": "#0FFF50",
+  "prompt": "#0FFF50"
+}
