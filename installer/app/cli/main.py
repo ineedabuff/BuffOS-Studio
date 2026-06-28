@@ -4,9 +4,6 @@ import argparse
 from pathlib import Path
 
 from app.cli.apply.buff import run as apply_buff
-from app.cli.apply.gaming import run as apply_gaming
-from app.cli.apply.nvidia import run as apply_nvidia
-from app.cli.apply.terminal import run as apply_terminal
 from app.cli.doctor import run_doctor
 from app.cli.modules import create_runner
 from app.cli.setup.run import run as setup_run
@@ -31,12 +28,7 @@ def build_parser() -> argparse.ArgumentParser:
         "target",
         nargs="?",
         default=None,
-        choices=[
-            "buff",
-            "gaming",
-            "nvidia",
-            "terminal",
-        ],
+        choices=["buff"],
     )
 
     doctor = sub.add_parser("doctor", help="Run doctor")
@@ -67,17 +59,10 @@ def main() -> None:
             run_doctor(json_output=args.json)
 
         case "apply":
-            match args.target:
-                case "buff":
-                    apply_buff()
-                case "gaming":
-                    apply_gaming()
-                case "nvidia":
-                    apply_nvidia()
-                case "terminal":
-                    apply_terminal()
-                case _:
-                    create_runner().execute()
+            if args.target == "buff":
+                apply_buff()
+            else:
+                create_runner().execute()
 
         case "generate":
             generate_bash(Path.home() / ".bashrc")
