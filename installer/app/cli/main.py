@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 
+from app.cli.doctor import run_doctor
 from app.cli.modules import create_runner
 from app.identity import APP_CLI, APP_NAME, VERSION
 
@@ -14,6 +15,7 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("version", help="Show version")
     sub.add_parser("analyze", help="Analyze only")
     sub.add_parser("apply", help="Analyze and repair")
+    sub.add_parser("doctor", help="Check system health")
 
     return parser
 
@@ -32,6 +34,9 @@ def main() -> None:
 
         case "apply":
             create_runner().execute()
+
+        case "doctor":
+            run_doctor()
 
         case _:
             parser.print_help()
