@@ -20,7 +20,13 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("version", help="Show version")
     sub.add_parser("analyze", help="Analyze only")
     sub.add_parser("apply", help="Analyze and repair")
-    sub.add_parser("doctor", help="Run Buff Helper doctor")
+
+    doctor = sub.add_parser("doctor", help="Run system doctor")
+    doctor.add_argument(
+        "--json",
+        action="store_true",
+        help="Output JSON report",
+    )
 
     generate = sub.add_parser("generate", help="Generate configuration files")
     generate.add_argument(
@@ -47,7 +53,7 @@ def main() -> None:
             create_runner().execute()
 
         case "doctor":
-            run_doctor()
+            run_doctor(json_output=args.json)
 
         case "generate":
             if args.target == "terminal":
