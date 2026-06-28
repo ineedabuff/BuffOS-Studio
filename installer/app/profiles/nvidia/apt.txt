@@ -1,0 +1,5 @@
+nvidia-driver-595
+nvidia-settings
+nvidia-prime
+libnvidia-gl-595:i386
+vulkan-tools

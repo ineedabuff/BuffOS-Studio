@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent / "profiles" / "buff"
+ROOT = Path(__file__).resolve().parent.parent / "profiles"
 
 
-def load(name: str) -> list[str]:
-    file = ROOT / f"{name}.txt"
+def load(name: str, profile: str = "buff") -> list[str]:
+    file = ROOT / profile / f"{name}.txt"
 
     if not file.exists():
         return []
