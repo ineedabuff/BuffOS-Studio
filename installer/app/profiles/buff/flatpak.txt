@@ -1,0 +1,4 @@
+ru.linux_gaming.PortProton
+com.discordapp.Discord
+com.github.tchx84.Flatseal
+org.mozilla.firefox

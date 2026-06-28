@@ -1,23 +1,15 @@
 from __future__ import annotations
 
-from app.cli.apply.gaming import run as gaming
-from app.cli.apply.nvidia import run as nvidia
-from app.cli.apply.terminal import run as terminal
+from app.profile.installer import run as install_profile
 
 
 def run() -> None:
     print("========================================")
-    print("      Buff Helper - Buff Profile")
+    print("        Applying BuffOS Profile")
     print("========================================")
     print()
 
-    terminal()
-    print()
+    install_profile()
 
-    nvidia()
     print()
-
-    gaming()
-    print()
-
-    print("✓ Buff profile completed.")
+    print("✓ BuffOS profile applied.")
