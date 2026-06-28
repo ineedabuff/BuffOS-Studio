@@ -1,4 +1,4 @@
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from app.catalog.search import find_by_id
 from app.setup.installer import install_selection
@@ -10,7 +10,11 @@ def test_install_selection():
 
     assert firefox is not None
 
-    with patch("app.setup.installer.run_plan") as run_plan:
-        install_selection(Selection([firefox]))
+    with patch(
+        "app.setup.installer.run_plan",
+        return_value=Mock(success=True),
+    ) as run_plan:
+        report = install_selection(Selection([firefox]))
 
     run_plan.assert_called_once()
+    assert report.success
