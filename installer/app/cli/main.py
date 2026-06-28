@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 
 from app.cli.apply.gaming import run as apply_gaming
+from app.cli.apply.nvidia import run as apply_nvidia
 from app.cli.doctor import run_doctor
 from app.cli.modules import create_runner
 from app.generators.terminal.generator import (
@@ -25,7 +26,10 @@ def build_parser() -> argparse.ArgumentParser:
     apply.add_argument(
         "target",
         nargs="?",
-        choices=["gaming"],
+        choices=[
+            "gaming",
+            "nvidia",
+        ],
     )
 
     doctor = sub.add_parser("doctor", help="Run system doctor")
@@ -50,10 +54,13 @@ def main() -> None:
             create_runner(dry_run=True).execute()
 
         case "apply":
-            if args.target == "gaming":
-                apply_gaming()
-            else:
-                create_runner().execute()
+            match args.target:
+                case "gaming":
+                    apply_gaming()
+                case "nvidia":
+                    apply_nvidia()
+                case _:
+                    create_runner().execute()
 
         case "doctor":
             run_doctor(json_output=args.json)
