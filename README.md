@@ -1,16 +1,14 @@
-# Buff Helper
+# BuffOS Studio
 
-> Understand before you automate.
+## Install
 
-Buff Helper is a plugin-driven Linux assistant.
+    git clone https://github.com/ineedabuff/BuffOS-Studio.git
+    cd BuffOS-Studio
+    ./install.sh
 
-It helps users analyze, repair, optimize and learn from their systems.
+## Use
 
-## Quick Start
-
-Run bootstrap, then analyze your system.
-
-## Documentation
-
-- English: docs/en/README.md
-- Français: docs/fr/README.md
+    source .venv/bin/activate
+    PYTHONPATH=installer python -m app.cli.main doctor
+    PYTHONPATH=installer python -m app.cli.main setup
+    PYTHONPATH=installer python -m app.cli.main wizard
