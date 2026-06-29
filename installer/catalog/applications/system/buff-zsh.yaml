@@ -1,0 +1,6 @@
+id: buff-zsh
+name: Buff ZSH
+category: system
+recommended: true
+install:
+  script: install-buff-zsh.sh

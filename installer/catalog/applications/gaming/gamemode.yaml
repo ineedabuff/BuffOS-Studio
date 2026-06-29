@@ -1,0 +1,7 @@
+id: gamemode
+name: GameMode
+category: gaming
+install:
+  apt: gamemode
+
+recommended: false

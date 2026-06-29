@@ -1,0 +1,7 @@
+id: zsh
+name: Zsh
+category: terminal
+install:
+  apt: zsh
+
+recommended: false

@@ -1,0 +1,7 @@
+id: claude
+name: Claude
+category: ai
+install:
+  script: install-claude.sh
+
+recommended: false

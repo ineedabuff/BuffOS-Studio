@@ -1,0 +1,7 @@
+id: fastfetch
+name: Fastfetch
+category: terminal
+install:
+  apt: fastfetch
+
+recommended: false

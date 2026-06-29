@@ -1,0 +1,7 @@
+id: flatseal
+name: Flatseal
+category: system
+install:
+  flatpak: com.github.tchx84.Flatseal
+
+recommended: false

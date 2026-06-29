@@ -1,16 +1,7 @@
 id: chrome
 name: Google Chrome
 category: browser
-description: Google web browser
-homepage: https://www.google.com/chrome
-recommended: true
-beginner: true
 install:
-  script: chrome.sh
-depends: []
-alternatives:
-  - chromium
-  - brave
-tags:
-  - browser
-  - google
+  script: install-google-chrome.sh
+
+recommended: true

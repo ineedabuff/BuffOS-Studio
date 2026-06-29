@@ -1,0 +1,7 @@
+id: btop
+name: btop
+category: terminal
+install:
+  apt: btop
+
+recommended: false

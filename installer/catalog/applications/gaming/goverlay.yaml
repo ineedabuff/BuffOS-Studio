@@ -1,0 +1,7 @@
+id: goverlay
+name: GOverlay
+category: gaming
+install:
+  apt: goverlay
+
+recommended: false

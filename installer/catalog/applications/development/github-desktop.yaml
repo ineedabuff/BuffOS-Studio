@@ -1,0 +1,7 @@
+id: github-desktop
+name: GitHub Desktop
+category: development
+install:
+  script: install-github-desktop.sh
+
+recommended: false

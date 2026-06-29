@@ -1,0 +1,7 @@
+id: steam
+name: Steam
+category: gaming
+install:
+  apt: steam-installer
+
+recommended: false

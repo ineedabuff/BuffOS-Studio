@@ -1,0 +1,7 @@
+id: chatgpt
+name: ChatGPT
+category: ai
+install:
+  script: install-chatgpt.sh
+
+recommended: false

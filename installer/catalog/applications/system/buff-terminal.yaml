@@ -1,0 +1,6 @@
+id: buff-terminal
+name: Buff Terminal
+category: system
+recommended: true
+install:
+  script: install-buff-term.sh

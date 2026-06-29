@@ -1,0 +1,7 @@
+id: mangohud
+name: MangoHud
+category: gaming
+install:
+  apt: mangohud
+
+recommended: false

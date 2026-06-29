@@ -1,0 +1,6 @@
+id: buff-extras
+name: Buff Extras
+category: system
+recommended: true
+install:
+  script: install-buff-extras.sh
