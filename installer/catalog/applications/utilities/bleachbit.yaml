@@ -1,0 +1,6 @@
+id: bleachbit
+name: BleachBit
+category: utilities
+recommended: false
+install:
+  apt: bleachbit

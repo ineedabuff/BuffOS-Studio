@@ -37,3 +37,6 @@ applications:
   - buff-extras
   - obs
   - vscode
+  - vlc
+  - gparted
+  - timeshift

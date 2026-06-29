@@ -1,0 +1,6 @@
+id: filezilla
+name: FileZilla
+category: network
+recommended: false
+install:
+  apt: filezilla

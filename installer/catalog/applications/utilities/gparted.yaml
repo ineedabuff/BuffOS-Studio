@@ -1,0 +1,6 @@
+id: gparted
+name: GParted
+category: utilities
+recommended: true
+install:
+  apt: gparted

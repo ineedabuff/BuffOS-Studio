@@ -1,0 +1,6 @@
+id: timeshift
+name: Timeshift
+category: utilities
+recommended: true
+install:
+  apt: timeshift

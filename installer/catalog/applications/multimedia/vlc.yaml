@@ -1,0 +1,6 @@
+id: vlc
+name: VLC
+category: multimedia
+recommended: true
+install:
+  apt: vlc
