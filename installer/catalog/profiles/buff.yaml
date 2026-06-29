@@ -1,0 +1,38 @@
+id: buff
+name: BuffOS Studio
+
+applications:
+  # Browser
+  - firefox
+  - chrome
+
+  # Communication
+  - vesktop
+
+  # Gaming
+  - steam
+  - portproton
+  - mangohud
+  - goverlay
+  - gamemode
+
+  # Terminal
+  - zsh
+  - fastfetch
+  - btop
+
+  # AI
+  - chatgpt
+  - claude
+
+  # Development
+  - github-desktop
+
+  # Flatpak
+  - flatseal
+
+  # BuffOS
+  - buff-terminal
+  - buff-zsh
+  - buff-extras
+  - obs

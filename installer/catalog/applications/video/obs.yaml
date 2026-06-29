@@ -1,0 +1,6 @@
+id: obs
+name: OBS Studio
+category: video
+recommended: true
+install:
+  flatpak: com.obsproject.Studio
