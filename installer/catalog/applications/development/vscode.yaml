@@ -1,0 +1,6 @@
+id: vscode
+name: Visual Studio Code
+category: development
+recommended: true
+install:
+  script: install-vscode.sh

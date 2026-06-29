@@ -1,0 +1,6 @@
+id: google-drive
+name: Google Drive
+category: system
+recommended: false
+install:
+  script: install-google-drive.sh

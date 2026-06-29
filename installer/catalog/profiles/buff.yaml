@@ -36,3 +36,4 @@ applications:
   - buff-zsh
   - buff-extras
   - obs
+  - vscode

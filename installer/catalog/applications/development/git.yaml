@@ -1,0 +1,6 @@
+id: git
+name: Git
+category: development
+recommended: true
+install:
+  apt: git
