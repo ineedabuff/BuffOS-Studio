@@ -26,7 +26,6 @@ applications:
   - claude
 
   # Development
-  - github-desktop
 
   # Flatpak
   - flatseal
