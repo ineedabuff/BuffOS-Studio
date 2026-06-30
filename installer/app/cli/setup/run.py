@@ -4,6 +4,7 @@ from app.catalog.profile_loader import load_profile
 from app.cli.doctor import run_doctor
 from app.install_engine.report_renderer import render_report
 from app.profile.selector import select_profile
+from app.profile.task_runner import run_profile_tasks
 from app.setup.app_selector import edit_selection
 from app.setup.confirm import confirm
 from app.setup.installer import install_selection
@@ -43,7 +44,13 @@ def run() -> None:
     print(render_report(report))
 
     print()
-    print("[3/3] Final diagnosis")
+    print("[3/4] Applying Buff configuration")
+    print()
+
+    run_profile_tasks(profile)
+
+    print()
+    print("[4/4] Final diagnosis")
     print()
 
     run_doctor()
