@@ -1,18 +1,15 @@
 # BuffOS Studio
 
-## Install
+## Fresh install MVP
 
-    git clone https://github.com/ineedabuff/BuffOS-Studio.git
-    cd BuffOS-Studio
-    ./install.sh
-
-## Use
-
-    ./buff-helper doctor
-    ./buff-helper setup
-    ./buff-helper wizard
-
-## Developer
-
-    source .venv/bin/activate
-    ./dev.sh
+```bash
+git clone https://github.com/ineedabuff/BuffOS-Studio.git
+cd BuffOS-Studio
+./install.sh
+./buff-helper setup
+./buff-helper doctor
+./buff-helper setup
+./buff-helper wizard
+./buff-helper install firefox
+source .venv/bin/activate
+./dev.sh
