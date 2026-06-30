@@ -1,0 +1,7 @@
+id: buff-postinstall
+name: Buff Post Install
+
+scripts:
+  - install-buff-term.sh
+  - install-buff-zsh.sh
+  - install-buff-extras.sh
