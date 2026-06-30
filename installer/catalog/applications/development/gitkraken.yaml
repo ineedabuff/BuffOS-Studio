@@ -1,0 +1,6 @@
+id: gitkraken
+name: GitKraken
+category: development
+recommended: false
+install:
+  flatpak: com.axosoft.GitKraken

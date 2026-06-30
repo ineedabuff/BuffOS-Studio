@@ -1,0 +1,6 @@
+id: lazygit
+name: Lazygit
+category: development
+recommended: true
+install:
+  apt: lazygit

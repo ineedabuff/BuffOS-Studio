@@ -39,3 +39,5 @@ applications:
   - vlc
   - gparted
   - timeshift
+  - git
+  - lazygit
